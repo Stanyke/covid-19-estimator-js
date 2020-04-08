@@ -9,16 +9,13 @@ const covid19ImpactEstimator = (data) => {
     impact: {
       currentlyInfected: impactCurrentlyInfected,
       infectionsByRequestedTime: impactInfectionsByRequestedTime,
-      periodType: "days",
-      periodType: "weeks",
-      periodType: "months"
+      periodType: {
+        days: 30 * reportedCases
+      }
     },
     severeImpact: {
       currentlyInfected: severeImpactcurrentlyInfected,
-      infectionsByRequestedTime: severeImpactInfectionsByRequestedTime,
-      periodType: "days",
-      periodType: "weeks",
-      periodType: "months"
+      infectionsByRequestedTime: severeImpactInfectionsByRequestedTime
     }
   };
 };
