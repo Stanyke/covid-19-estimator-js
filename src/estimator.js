@@ -24,20 +24,33 @@ const covid19ImpactEstimator = (data) => {
     severeImpact.currentlyInfected * 2 ** exponent
   );
 
-  impact.severeCasesByRequestedTime = Math.floor(0.15 * impact.infectionsByRequestedTime);
+  impact.severeCasesByRequestedTime = 0.15 * impact.infectionsByRequestedTime;
 
-  const sCBRT = 0.15 * severeImpact.infectionsByRequestedTime;
-
-  severeImpact.severeCasesByRequestedTime = sCBRT;
+  severeImpact.severeCasesByRequestedTime = 0.15 * severeImpact.infectionsByRequestedTime;
 
   const bedAvailability = 0.35 * data.totalHospitalBeds;
 
-  const hBBRT = bedAvailability - impact.severeCasesByRequestedTime;
-
-  impact.hospitalBedsByRequestedTime = hBBRT;
+  impact.hospitalBedsByRequestedTime = bedAvailability - impact.severeCasesByRequestedTime;
 
   severeImpact.hospitalBedsByRequestedTime = bedAvailability
     - severeImpact.severeCasesByRequestedTime;
+
+  impact.casesForICUByRequestedTime = 0.05 * impact.infectionsByRequestedTime;
+
+  severeImpact.casesForICUByRequestedTime = 0.05 * severeImpact.infectionsByRequestedTime;
+
+  impact.casesForVentilatorsByRequestedTime = 0.02 * impact.infectionsByRequestedTime;
+
+  severeImpact.casesForVentilatorsByRequestedTime = 0.02 * severeImpact.infectionsByRequestedTime;
+
+  const majorityEarning = data.region.avgDailyIncomePopulation;
+  const avgDailyIncome = data.region.avgDailyIncomeInUSD;
+
+  impact.dollarsInFlight = impact.infectionsByRequestedTime
+    * majorityEarning * avgDailyIncome * numberOfDays;
+
+  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime
+    * majorityEarning * avgDailyIncome * numberOfDays;
 
   const result = {
     data,
