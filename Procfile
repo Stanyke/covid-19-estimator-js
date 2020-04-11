@@ -1,5 +1,5 @@
 "scripts": {
-        "start": "node src/estimator.js"
+        "start": "node src/routes.js"
 }
 
 "engines": {
