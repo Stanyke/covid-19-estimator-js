@@ -30,6 +30,18 @@ app.post('/api/v1/on-covid-19', (req, res) => {
   res.send(covid19ImpactEstimator(data));
 });
 
+app.get('/api/v1/on-covid-19/json', (req, res) => {
+  const data = {
+    region: 'Africa',
+    periodType: 'days',
+    timeToElapse: 58,
+    reportedCases: 674,
+    population: 66622705,
+    totalHospitalBeds: 1380614
+  };
+  res.send(covid19ImpactEstimator(data));
+});
+
 app.post('/api/v1/on-covid-19/json', (req, res) => {
   const data = {};
   data.region = req.body.region;
