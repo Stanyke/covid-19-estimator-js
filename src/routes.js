@@ -31,14 +31,13 @@ app.post('/api/v1/on-covid-19', (req, res) => {
 });
 
 app.get('/api/v1/on-covid-19/json', (req, res) => {
-  const data = {
-    region: 'Africa',
-    periodType: 'days',
-    timeToElapse: 58,
-    reportedCases: 674,
-    population: 66622705,
-    totalHospitalBeds: 1380614
-  };
+  const data = {};
+  data.region = req.body.region;
+  data.periodType = req.body.periodType;
+  data.timeToElapse = req.body.timeToElapse;
+  data.reportedCases = req.body.reportedCases;
+  data.population = req.body.population;
+  data.totalHospitalBeds = req.body.totalHospitalBeds;
   res.send(covid19ImpactEstimator(data));
 });
 
@@ -51,6 +50,14 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
   data.population = req.body.population;
   data.totalHospitalBeds = req.body.totalHospitalBeds;
   res.send(covid19ImpactEstimator(data));
+});
+
+app.get('/api/v1/on-covid-19/xml', (req, res) => {
+  const data = req.body;
+  const estimation = covid19ImpactEstimator(data);
+  const builder = new Xml2js.Builder();
+  res.header('Content-Type', 'application/xml; charset=UTF-8');
+  res.status(200).send(builder.buildObject(estimation));
 });
 
 app.post('/api/v1/on-covid-19/xml', (req, res) => {
