@@ -148,4 +148,4 @@ app.listen(port, () => {
   console.log(`Server Running On port ${port}`);
 });
 
-module.exports = covid19ImpactEstimator;
+export default covid19ImpactEstimator;
