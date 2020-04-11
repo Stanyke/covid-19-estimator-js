@@ -1,7 +1,1 @@
-"scripts": {
-        "start": "node src/routes.js"
-}
-
-"engines": {
-        "node": "8.12.0"
-}
+web: node src/routes.js
