@@ -34,14 +34,18 @@ app.get('/api/v1/on-covid-19', (req, res) => {
 app.post('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
-  const data = {
-    region: req.body.region,
-    periodType: req.body.periodType,
-    timeToElapse: req.body.timeToElapse,
-    reportedCases: req.body.reportedCases,
-    population: req.body.population,
-    totalHospitalBeds: req.body.totalHospitalBeds
+  const data = {};
+  data.region = {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
   };
+  data.periodType = 'days';
+  data.timeToElapse = 58;
+  data.reportedCases = 674;
+  data.population = 66622705;
+  data.totalHospitalBeds = 1380614;
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
@@ -89,12 +93,17 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const data = {};
-  data.region = req.body.region;
-  data.periodType = req.body.periodType;
-  data.timeToElapse = req.body.timeToElapse;
-  data.reportedCases = req.body.reportedCases;
-  data.population = req.body.population;
-  data.totalHospitalBeds = req.body.totalHospitalBeds;
+  data.region = {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
+  };
+  data.periodType = 'days';
+  data.timeToElapse = 58;
+  data.reportedCases = 674;
+  data.population = 66622705;
+  data.totalHospitalBeds = 1380614;
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
@@ -144,7 +153,18 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
 app.post('/api/v1/on-covid-19/xml', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
-  const data = req.body;
+  const data = {};
+  data.region = {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
+  };
+  data.periodType = 'days';
+  data.timeToElapse = 58;
+  data.reportedCases = 674;
+  data.population = 66622705;
+  data.totalHospitalBeds = 1380614;
 
   const estimation = covid19ImpactEstimator(data);
   const builder = new Xml2js.Builder();
