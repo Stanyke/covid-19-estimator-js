@@ -1,1 +1,1 @@
-web: node src/estimator.js
+web: node src/routes.js

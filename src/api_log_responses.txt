@@ -13,3 +13,4 @@ POST  /api/v1/on-covid-19  200  22ms
 POST  /api/v1/on-covid-19  200  4ms
 POST  /api/v1/on-covid-19  200  12ms
 POST  /api/v1/on-covid-19  200  2ms
+POST  /api/v1/on-covid-19  200  79ms
