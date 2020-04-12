@@ -35,7 +35,12 @@ app.post('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const data = {};
-  data.region = req.body.region;
+  data.region = {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
+  };
   data.periodType = req.body.periodType;
   data.timeToElapse = req.body.timeToElapse;
   data.reportedCases = req.body.reportedCases;
