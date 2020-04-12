@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const logsFilePath = path.join(__dirname, 'api_log_responses.txt');
 
-app.get('/api/v1/on-covid-19', (req, res) => {
+app.get('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const requestApi = res.status(200).json({
@@ -31,7 +31,7 @@ app.get('/api/v1/on-covid-19', (req, res) => {
   }
 });
 
-app.post('/api/v1/on-covid-19', (req, res) => {
+app.post('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const data = {
@@ -56,7 +56,7 @@ app.post('/api/v1/on-covid-19', (req, res) => {
   }
 });
 
-app.get('/api/v1/on-covid-19/json', (req, res) => {
+app.get('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19/json', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const data = {};
@@ -85,7 +85,7 @@ app.get('/api/v1/on-covid-19/json', (req, res) => {
   }
 });
 
-app.post('/api/v1/on-covid-19/json', (req, res) => {
+app.post('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19/json', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const data = {};
@@ -109,7 +109,7 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
   }
 });
 
-app.get('/api/v1/on-covid-19/xml', (req, res) => {
+app.get('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19/xml', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const data = {};
@@ -141,7 +141,7 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
   }
 });
 
-app.post('/api/v1/on-covid-19/xml', (req, res) => {
+app.post('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19/xml', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   const data = req.body;
@@ -162,12 +162,12 @@ app.post('/api/v1/on-covid-19/xml', (req, res) => {
   }
 });
 
-app.get('/api/v1/on-covid-19/logs', (req, res) => {
+app.get('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19/logs', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
   fs.readFile(logsFilePath, 'utf8', (err, data) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err);
     }
     if (!err) {
       res.header('Content-Type', 'text/plain; charset=UTF-8');
@@ -184,7 +184,7 @@ app.get('/api/v1/on-covid-19/logs', (req, res) => {
   });
 });
 
-app.delete('/api/v1/on-covid-19/logs', (req, res) => {
+app.delete('https://covid-19-estimate.herokuapp.com/api/v1/on-covid-19/logs', (req, res) => {
   fs.writeFile(logsFilePath, '', (fsErr) => {
     if (fsErr) {
       res.status(505).json({
