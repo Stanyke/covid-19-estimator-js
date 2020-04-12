@@ -177,7 +177,7 @@ app.get('/api/v1/on-covid-19/logs', (req, res) => {
 
       const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
-      fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/logs  200  ${apiRunTimeSpent}\n`, (fsErr) => {
+      fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/logs  200  ${apiRunTimeSpent}\n`, (fsErrv) => {
         if (fsErr) throw err;
       });
     }
