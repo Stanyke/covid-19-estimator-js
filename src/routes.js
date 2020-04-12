@@ -5,7 +5,7 @@ const path = require('path');
 const Xml2js = require('xml2js');
 const covid19ImpactEstimator = require('./estimator');
 
-const app = express();
+const app = express(); 
 app.use(express.static(`${__dirname}/public`));
 
 app.use(bodyParser.json());
