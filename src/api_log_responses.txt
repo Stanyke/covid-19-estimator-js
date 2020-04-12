@@ -5,3 +5,6 @@ GET  /api/v1/on-covid-19/logs  200  4ms
 GET  /api/v1/on-covid-19/xml  200  54ms
 GET  /api/v1/on-covid-19/logs  200  3ms
 GET  /api/v1/on-covid-19/logs  200  5ms
+GET  /api/v1/on-covid-19  200  64ms
+GET  /api/v1/on-covid-19/logs  200  9ms
+GET  /api/v1/on-covid-19/xml  200  27ms
