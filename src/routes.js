@@ -10,15 +10,30 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const logsFilePath = path.join(__dirname, 'api_log_responses.txt');
 
 app.get('/api/v1/on-covid-19', (req, res) => {
-  res.status(200).json({
+  const apiRunTimeBegin = new Date().getTime();
+
+  const requestApi = res.status(200).json({
     success: true,
-    message: 'Welcome to Covid-19 Estimator API'
+    message: 'Welcome to Covid-19 Estimator RestFul API'
   });
+
+  const apiRunTimeEnd = new Date().getTime();
+
+  const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+
+  if (requestApi) {
+    fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19  200  ${apiRunTimeSpent}\n`, (err) => {
+      if (err) throw err;
+    });
+  }
 });
 
 app.post('/api/v1/on-covid-19', (req, res) => {
+  const apiRunTimeBegin = new Date().getTime();
+
   const data = {
     region: req.body.region,
     periodType: req.body.periodType,
@@ -27,21 +42,52 @@ app.post('/api/v1/on-covid-19', (req, res) => {
     population: req.body.population,
     totalHospitalBeds: req.body.totalHospitalBeds
   };
-  res.send(covid19ImpactEstimator(data));
+
+  const sendApiRequest = res.send(covid19ImpactEstimator(data));
+
+  const apiRunTimeEnd = new Date().getTime();
+
+  const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+
+  if (sendApiRequest) {
+    fs.appendFile(logsFilePath, `POST  /api/v1/on-covid-19  200  ${apiRunTimeSpent}\n`, (err) => {
+      if (err) throw err;
+    });
+  }
 });
 
 app.get('/api/v1/on-covid-19/json', (req, res) => {
+  const apiRunTimeBegin = new Date().getTime();
+
   const data = {};
-  data.region = req.body.region;
-  data.periodType = req.body.periodType;
-  data.timeToElapse = req.body.timeToElapse;
-  data.reportedCases = req.body.reportedCases;
-  data.population = req.body.population;
-  data.totalHospitalBeds = req.body.totalHospitalBeds;
-  res.send(covid19ImpactEstimator(data));
+  data.region = {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
+  };
+  data.periodType = 'days';
+  data.timeToElapse = 58;
+  data.reportedCases = 674;
+  data.population = 66622705;
+  data.totalHospitalBeds = 1380614;
+
+  const requestApi = res.send(covid19ImpactEstimator(data));
+
+  const apiRunTimeEnd = new Date().getTime();
+
+  const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+
+  if (requestApi) {
+    fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/json  200  ${apiRunTimeSpent}\n`, (err) => {
+      if (err) throw err;
+    });
+  }
 });
 
 app.post('/api/v1/on-covid-19/json', (req, res) => {
+  const apiRunTimeBegin = new Date().getTime();
+
   const data = {};
   data.region = req.body.region;
   data.periodType = req.body.periodType;
@@ -49,48 +95,109 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
   data.reportedCases = req.body.reportedCases;
   data.population = req.body.population;
   data.totalHospitalBeds = req.body.totalHospitalBeds;
-  res.send(covid19ImpactEstimator(data));
+
+  const sendApiRequest = res.send(covid19ImpactEstimator(data));
+
+  const apiRunTimeEnd = new Date().getTime();
+
+  const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+
+  if (sendApiRequest) {
+    fs.appendFile(logsFilePath, `POST  /api/v1/on-covid-19/json  200  ${apiRunTimeSpent}\n`, (err) => {
+      if (err) throw err;
+    });
+  }
 });
 
 app.get('/api/v1/on-covid-19/xml', (req, res) => {
-  const data = req.body;
+  const apiRunTimeBegin = new Date().getTime();
+
+  const data = {};
+  data.region = {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
+  };
+  data.periodType = 'days';
+  data.timeToElapse = 58;
+  data.reportedCases = 674;
+  data.population = 66622705;
+  data.totalHospitalBeds = 1380614;
+
   const estimation = covid19ImpactEstimator(data);
   const builder = new Xml2js.Builder();
   res.header('Content-Type', 'application/xml; charset=UTF-8');
-  res.status(200).send(builder.buildObject(estimation));
+  const requestApi = res.status(200).send(builder.buildObject(estimation));
+
+  const apiRunTimeEnd = new Date().getTime();
+
+  const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+
+  if (requestApi) {
+    fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/xml  200  ${apiRunTimeSpent}\n`, (err) => {
+      if (err) throw err;
+    });
+  }
 });
 
 app.post('/api/v1/on-covid-19/xml', (req, res) => {
+  const apiRunTimeBegin = new Date().getTime();
+
   const data = req.body;
+
   const estimation = covid19ImpactEstimator(data);
   const builder = new Xml2js.Builder();
   res.header('Content-Type', 'application/xml; charset=UTF-8');
-  res.status(200).send(builder.buildObject(estimation));
+  const sendApiRequest = res.status(200).send(builder.buildObject(estimation));
+
+  const apiRunTimeEnd = new Date().getTime();
+
+  const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+
+  if (sendApiRequest) {
+    fs.appendFile(logsFilePath, `POST  /api/v1/on-covid-19/xml  200  ${apiRunTimeSpent}\n`, (err) => {
+      if (err) throw err;
+    });
+  }
 });
 
 app.get('/api/v1/on-covid-19/logs', (req, res) => {
-  const filePath = path.join(__dirname, 'myLogs.txt');
-  fs.readFile(filePath, 'utf8', (err, data) => {
+  const apiRunTimeBegin = new Date().getTime();
+
+  fs.readFile(logsFilePath, 'utf8', (err, data) => {
     if (err) {
       console.log(err);
     }
     if (!err) {
       res.header('Content-Type', 'text/plain; charset=UTF-8');
       res.status(200).send(`${data}`);
+
+      const apiRunTimeEnd = new Date().getTime();
+
+      const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+
+      fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/logs  200  ${apiRunTimeSpent}\n`, (err) => {
+        if (err) throw err;
+      });
     }
   });
 });
 
 app.delete('/api/v1/on-covid-19/logs', (req, res) => {
-  try {
-    const filePath = path.join(__dirname, 'myLogs.txt');
-    fs.unlinkSync(filePath);
-    res.status(201).send({
-      message: 'logs deleted'
+  fs.writeFile(logsFilePath, '', (fsErr) => {
+    if (fsErr) {
+      res.status(505).json({
+        success: false,
+        message: 'We encoutered an error deleting the logs, try again...'
+      });
+    }
+
+    res.status(201).json({
+      success: true,
+      message: 'Logs deleted successfully'
     });
-  } catch (error) {
-    throw new Error('We Encoutered an error deleting the logs, try again...');
-  }
+  });
 });
 
 const port = process.env.PORT || 3000;
