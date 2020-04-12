@@ -34,19 +34,7 @@ app.get('/api/v1/on-covid-19', (req, res) => {
 app.post('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
-  const data = {
-    region: {
-      name: req.body.region.name,
-      avgAge: req.body.region.avgAge,
-      avgDailyIncomeInUSD: req.body.region.avgDailyIncomeInUSD,
-      avgDailyIncomePopulation: req.body.region.avgDailyIncomePopulation
-    },
-    periodType: req.body.periodType,
-    timeToElapse: req.body.timeToElapse,
-    reportedCases: req.body.reportedCases,
-    population: req.body.population,
-    totalHospitalBeds: req.body.totalHospitalBeds
-  };
+  const data = req.body;
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
