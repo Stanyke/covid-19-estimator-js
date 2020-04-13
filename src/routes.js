@@ -165,6 +165,7 @@ app.get('/api/v1/on-covid-19/logs', (req, res) => {
       res.status(500).send(err);
       return;
     }
+
     res.status(200).send(`${data}`);
 
     const apiRunTimeEnd = new Date().getTime();
