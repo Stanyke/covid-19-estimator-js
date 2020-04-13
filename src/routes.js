@@ -188,7 +188,7 @@ app.delete('/api/v1/on-covid-19/logs', (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'API response logs deleted successfully'
+      message: 'API response(s) logs deleted successfully'
     });
   });
 });
