@@ -157,22 +157,24 @@ app.post('/api/v1/on-covid-19/xml', (req, res) => {
 
 app.get('/api/v1/on-covid-19/logs', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
-  res.header('Content-Type', 'text/plain');
 
-  fs.readFile(logsFilePath, { encoding: 'utf-8' }, (err, data) => {
+  res.header('Content-Type', 'text/plain; charset=UTF-8');
+
+  fs.readFile(logsFilePath, 'utf8', (err, data) => {
     if (err) {
       res.status(500).send(err);
-      return;
     }
-    res.status(200).send(`${data}`);
+    if (!err) {
+      res.status(200).send(`${data}`);
 
-    const apiRunTimeEnd = new Date().getTime();
+      const apiRunTimeEnd = new Date().getTime();
 
-    const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
+      const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
-    fs.appendFile(logsFilePath, `GET\t\t/api/v1/on-covid-19/logs\t\t200\t\t${apiRunTimeSpent}\n`, (fsErr) => {
-      if (fsErr) throw err;
-    });
+      fs.appendFile(logsFilePath, `GET\t\t/api/v1/on-covid-19/logs\t\t200\t\t${apiRunTimeSpent}\n`, (fsErr) => {
+        if (fsErr) throw err;
+      });
+    }
   });
 });
 
