@@ -25,7 +25,7 @@ app.get('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
   if (requestApi) {
-    fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19  200  ${apiRunTimeSpent}\n`, (err) => {
+    fs.appendFile(logsFilePath, `GET\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeSpent}\n`, (err) => {
       if (err) throw err;
     });
   }
@@ -34,13 +34,7 @@ app.get('/api/v1/on-covid-19', (req, res) => {
 app.post('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeBegin = new Date().getTime();
 
-  const data = {};
-  data.region = req.body.region;
-  data.periodType = req.body.periodType;
-  data.timeToElapse = req.body.timeToElapse;
-  data.reportedCases = req.body.reportedCases;
-  data.population = req.body.population;
-  data.totalHospitalBeds = req.body.totalHospitalBeds;
+  const data = req.body;
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
@@ -49,7 +43,7 @@ app.post('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
   if (sendApiRequest) {
-    fs.appendFile(logsFilePath, `POST  /api/v1/on-covid-19  200  ${apiRunTimeSpent}\n`, (err) => {
+    fs.appendFile(logsFilePath, `POST\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeSpent}\n`, (err) => {
       if (err) throw err;
     });
   }
@@ -78,7 +72,7 @@ app.get('/api/v1/on-covid-19/json', (req, res) => {
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
   if (requestApi) {
-    fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/json  200  ${apiRunTimeSpent}\n`, (err) => {
+    fs.appendFile(logsFilePath, `GET\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeSpent}\n`, (err) => {
       if (err) throw err;
     });
   }
@@ -102,7 +96,7 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
   if (sendApiRequest) {
-    fs.appendFile(logsFilePath, `POST  /api/v1/on-covid-19/json  200  ${apiRunTimeSpent}\n`, (err) => {
+    fs.appendFile(logsFilePath, `POST\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeSpent}\n`, (err) => {
       if (err) throw err;
     });
   }
@@ -134,7 +128,7 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
   if (requestApi) {
-    fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/xml  200  ${apiRunTimeSpent}\n`, (err) => {
+    fs.appendFile(logsFilePath, `GET\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeSpent}\n`, (err) => {
       if (err) throw err;
     });
   }
@@ -155,7 +149,7 @@ app.post('/api/v1/on-covid-19/xml', (req, res) => {
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
   if (sendApiRequest) {
-    fs.appendFile(logsFilePath, `POST  /api/v1/on-covid-19/xml  200  ${apiRunTimeSpent}\n`, (err) => {
+    fs.appendFile(logsFilePath, `POST\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeSpent}\n`, (err) => {
       if (err) throw err;
     });
   }
@@ -176,7 +170,7 @@ app.get('/api/v1/on-covid-19/logs', (req, res) => {
 
       const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}ms`;
 
-      fs.appendFile(logsFilePath, `GET  /api/v1/on-covid-19/logs  200  ${apiRunTimeSpent}\n`, (fsErr) => {
+      fs.appendFile(logsFilePath, `GET\t\t/api/v1/on-covid-19/logs\t\t200\t\t${apiRunTimeSpent}\n`, (fsErr) => {
         if (fsErr) throw err;
       });
     }
