@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const Xml2js = require('xml2js');
-const now = require("performance-now");
+const now = require('performance-now');
 const covid19ImpactEstimator = require('./estimator');
 
 const app = express();
@@ -24,7 +24,7 @@ app.get('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeEnd = new Date().getTime();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
-  const totalTimeInWholeNumber = Math.trunc(apiRunTimeSpent) + 'ms';
+  const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
 
   if (requestApi) {
     fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19\t\t200\t\t${totalTimeInWholeNumber}`, (err) => {
@@ -43,7 +43,7 @@ app.post('/api/v1/on-covid-19', (req, res) => {
   const apiRunTimeEnd = new Date().getTime();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
-  const totalTimeInWholeNumber = Math.trunc(apiRunTimeSpent) + 'ms';
+  const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
 
   if (sendApiRequest) {
     fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19\t\t200\t\t${totalTimeInWholeNumber}`, (err) => {
@@ -73,7 +73,7 @@ app.get('/api/v1/on-covid-19/json', (req, res) => {
   const apiRunTimeEnd = new Date().getTime();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
-  const totalTimeInWholeNumber = Math.trunc(apiRunTimeSpent) + 'ms';
+  const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
 
   if (requestApi) {
     fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/json\t\t200\t\t${totalTimeInWholeNumber}`, (err) => {
@@ -98,7 +98,7 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
   const apiRunTimeEnd = new Date().getTime();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
-  const totalTimeInWholeNumber = Math.trunc(apiRunTimeSpent) + 'ms';
+  const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
 
   if (sendApiRequest) {
     fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/json\t\t200\t\t${totalTimeInWholeNumber}`, (err) => {
@@ -131,7 +131,7 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
   const apiRunTimeEnd = new Date().getTime();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
-  const totalTimeInWholeNumber = Math.trunc(apiRunTimeSpent) + 'ms';
+  const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
 
   if (requestApi) {
     fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/xml\t\t200\t\t${totalTimeInWholeNumber}`, (err) => {
@@ -153,7 +153,7 @@ app.post('/api/v1/on-covid-19/xml', (req, res) => {
   const apiRunTimeEnd = new Date().getTime();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
-  const totalTimeInWholeNumber = Math.trunc(apiRunTimeSpent) + 'ms';
+  const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
 
   if (sendApiRequest) {
     fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/xml\t\t200\t\t${totalTimeInWholeNumber}`, (err) => {
@@ -177,7 +177,7 @@ app.get('/api/v1/on-covid-19/logs', (req, res) => {
       const apiRunTimeEnd = now();
 
       const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
-      const totalTimeInWholeNumber = Math.trunc(apiRunTimeSpent) + 'ms';
+      const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
 
       fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/logs\t\t200\t\t${totalTimeInWholeNumber}`, (fsErr) => {
         if (fsErr) throw err;
