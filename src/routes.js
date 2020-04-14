@@ -23,7 +23,8 @@ app.get('/api/v1/on-covid-19', (req, res) => {
     message: 'Welcome to Covid-19 Estimator RestFul API'
   });
 
-  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0]
+     * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (requestApi) {
     fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
@@ -41,7 +42,8 @@ app.post('/api/v1/on-covid-19', (req, res) => {
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0]
+     * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (sendApiRequest) {
     fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
@@ -70,7 +72,8 @@ app.get('/api/v1/on-covid-19/json', (req, res) => {
 
   const requestApi = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0]
+     * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (requestApi) {
     fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
@@ -94,7 +97,8 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0]
+     * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (sendApiRequest) {
     fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
@@ -126,7 +130,8 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=UTF-8');
   const requestApi = res.status(200).send(builder.buildObject(estimation));
 
-  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0]
+     * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (requestApi) {
     fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
@@ -147,7 +152,8 @@ app.post('/api/v1/on-covid-19/xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=UTF-8');
   const sendApiRequest = res.status(200).send(builder.buildObject(estimation));
 
-  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0]
+     * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (sendApiRequest) {
     fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
@@ -169,7 +175,8 @@ app.get('/api/v1/on-covid-19/logs', (req, res) => {
     }
     if (!err) {
       res.status(200).send(`${data}`);
-      const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
+      const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0]
+         * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
       fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/logs\t\t200\t\t${apiRunTimeEnd}ms`, (fsErr) => {
         if (fsErr) throw err;
