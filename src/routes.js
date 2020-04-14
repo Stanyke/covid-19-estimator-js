@@ -14,14 +14,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const logsFilePath = path.join(__dirname, 'api_log_responses.txt');
 
 app.get('/api/v1/on-covid-19', (req, res) => {
-  const apiRunTimeBegin = new Date().getTime();
+  const apiRunTimeBegin = now();
 
   const requestApi = res.status(200).json({
     success: true,
     message: 'Welcome to Covid-19 Estimator RestFul API'
   });
 
-  const apiRunTimeEnd = new Date().getTime();
+  const apiRunTimeEnd = now();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
   const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
@@ -34,13 +34,13 @@ app.get('/api/v1/on-covid-19', (req, res) => {
 });
 
 app.post('/api/v1/on-covid-19', (req, res) => {
-  const apiRunTimeBegin = new Date().getTime();
+  const apiRunTimeBegin = now();
 
   const data = req.body;
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = new Date().getTime();
+  const apiRunTimeEnd = now();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
   const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
@@ -53,7 +53,7 @@ app.post('/api/v1/on-covid-19', (req, res) => {
 });
 
 app.get('/api/v1/on-covid-19/json', (req, res) => {
-  const apiRunTimeBegin = new Date().getTime();
+  const apiRunTimeBegin = now();
 
   const data = {};
   data.region = {
@@ -70,7 +70,7 @@ app.get('/api/v1/on-covid-19/json', (req, res) => {
 
   const requestApi = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = new Date().getTime();
+  const apiRunTimeEnd = now();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
   const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
@@ -83,7 +83,7 @@ app.get('/api/v1/on-covid-19/json', (req, res) => {
 });
 
 app.post('/api/v1/on-covid-19/json', (req, res) => {
-  const apiRunTimeBegin = new Date().getTime();
+  const apiRunTimeBegin = now();
 
   const data = {};
   data.region = req.body.region;
@@ -95,7 +95,7 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = new Date().getTime();
+  const apiRunTimeEnd = now();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
   const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
@@ -108,7 +108,7 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
 });
 
 app.get('/api/v1/on-covid-19/xml', (req, res) => {
-  const apiRunTimeBegin = new Date().getTime();
+  const apiRunTimeBegin = now();
 
   const data = {};
   data.region = {
@@ -128,7 +128,7 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=UTF-8');
   const requestApi = res.status(200).send(builder.buildObject(estimation));
 
-  const apiRunTimeEnd = new Date().getTime();
+  const apiRunTimeEnd = now();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
   const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
@@ -141,7 +141,7 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
 });
 
 app.post('/api/v1/on-covid-19/xml', (req, res) => {
-  const apiRunTimeBegin = new Date().getTime();
+  const apiRunTimeBegin = now();
 
   const data = req.body;
 
@@ -150,7 +150,7 @@ app.post('/api/v1/on-covid-19/xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=UTF-8');
   const sendApiRequest = res.status(200).send(builder.buildObject(estimation));
 
-  const apiRunTimeEnd = new Date().getTime();
+  const apiRunTimeEnd = now();
 
   const apiRunTimeSpent = `${(apiRunTimeEnd - apiRunTimeBegin)}`;
   const totalTimeInWholeNumber = `${Math.trunc(apiRunTimeSpent)}ms`;
