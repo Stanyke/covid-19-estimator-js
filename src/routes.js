@@ -14,43 +14,46 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const logsFilePath = path.join(__dirname, 'api_log_responses.txt');
 
 app.get('/api/v1/on-covid-19', (req, res) => {
-  const start = hrtime();
-  hrtime(start);
+  const apiRunTimeStart = hrtime();
+  const timeInNanoSec = 1e9;
+  const apiRunTimeDifference = process.hrtime(apiRunTimeStart);
 
   const requestApi = res.status(200).json({
     success: true,
     message: 'Welcome to Covid-19 Estimator RestFul API'
   });
 
-  const apiRunTimeEnd = `${Math.trunc(hrtime(start, 'ms'))}ms`;
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (requestApi) {
-    fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeEnd}`, (err) => {
+    fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
       if (err) throw err;
     });
   }
 });
 
 app.post('/api/v1/on-covid-19', (req, res) => {
-  const start = hrtime();
-  hrtime(start);
+  const apiRunTimeStart = hrtime();
+  const timeInNanoSec = 1e9;
+  const apiRunTimeDifference = process.hrtime(apiRunTimeStart);
 
   const data = req.body;
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = `${Math.trunc(hrtime(start, 'ms'))}ms`;
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (sendApiRequest) {
-    fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeEnd}`, (err) => {
+    fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
       if (err) throw err;
     });
   }
 });
 
 app.get('/api/v1/on-covid-19/json', (req, res) => {
-  const start = hrtime();
-  hrtime(start);
+  const apiRunTimeStart = hrtime();
+  const timeInNanoSec = 1e9;
+  const apiRunTimeDifference = process.hrtime(apiRunTimeStart);
 
   const data = {};
   data.region = {
@@ -67,18 +70,19 @@ app.get('/api/v1/on-covid-19/json', (req, res) => {
 
   const requestApi = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = `${Math.trunc(hrtime(start, 'ms'))}ms`;
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (requestApi) {
-    fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeEnd}`, (err) => {
+    fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
       if (err) throw err;
     });
   }
 });
 
 app.post('/api/v1/on-covid-19/json', (req, res) => {
-  const start = hrtime();
-  hrtime(start);
+  const apiRunTimeStart = hrtime();
+  const timeInNanoSec = 1e9;
+  const apiRunTimeDifference = process.hrtime(apiRunTimeStart);
 
   const data = {};
   data.region = req.body.region;
@@ -90,18 +94,19 @@ app.post('/api/v1/on-covid-19/json', (req, res) => {
 
   const sendApiRequest = res.send(covid19ImpactEstimator(data));
 
-  const apiRunTimeEnd = `${Math.trunc(hrtime(start, 'ms'))}ms`;
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (sendApiRequest) {
-    fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeEnd}`, (err) => {
+    fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/json\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
       if (err) throw err;
     });
   }
 });
 
 app.get('/api/v1/on-covid-19/xml', (req, res) => {
-  const start = hrtime();
-  hrtime(start);
+  const apiRunTimeStart = hrtime();
+  const timeInNanoSec = 1e9;
+  const apiRunTimeDifference = process.hrtime(apiRunTimeStart);
 
   const data = {};
   data.region = {
@@ -121,18 +126,19 @@ app.get('/api/v1/on-covid-19/xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=UTF-8');
   const requestApi = res.status(200).send(builder.buildObject(estimation));
 
-  const apiRunTimeEnd = `${Math.trunc(hrtime(start, 'ms'))}ms`;
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (requestApi) {
-    fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeEnd}`, (err) => {
+    fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
       if (err) throw err;
     });
   }
 });
 
 app.post('/api/v1/on-covid-19/xml', (req, res) => {
-  const start = hrtime();
-  hrtime(start);
+  const apiRunTimeStart = hrtime();
+  const timeInNanoSec = 1e9;
+  const apiRunTimeDifference = process.hrtime(apiRunTimeStart);
 
   const data = req.body;
 
@@ -141,30 +147,31 @@ app.post('/api/v1/on-covid-19/xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=UTF-8');
   const sendApiRequest = res.status(200).send(builder.buildObject(estimation));
 
-  const apiRunTimeEnd = `${Math.trunc(hrtime(start, 'ms'))}ms`;
+  const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
   if (sendApiRequest) {
-    fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeEnd}`, (err) => {
+    fs.appendFile(logsFilePath, `\nPOST\t\t/api/v1/on-covid-19/xml\t\t200\t\t${apiRunTimeEnd}ms`, (err) => {
       if (err) throw err;
     });
   }
 });
 
 app.get('/api/v1/on-covid-19/logs', (req, res) => {
-  res.header('Content-Type', 'text/plain');
-  const start = hrtime();
-  hrtime(start);
+  res.header('Content-Type', 'text/plain; charset=UTF-8');
 
-  fs.readFile(logsFilePath, 'utf8', (err, data) => {
+  const apiRunTimeStart = hrtime();
+  const timeInNanoSec = 1e9;
+  const apiRunTimeDifference = process.hrtime(apiRunTimeStart);
+
+  fs.readFile(logsFilePath, (err, data) => {
     if (err) {
       res.status(500).send(err);
     }
     if (!err) {
       res.status(200).send(`${data}`);
+      const apiRunTimeEnd = Math.trunc((apiRunTimeDifference[0] * timeInNanoSec + apiRunTimeDifference[1]) / 500);
 
-      const apiRunTimeEnd = `${Math.trunc(hrtime(start, 'ms'))}ms`;
-
-      fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/logs\t\t200\t\t${apiRunTimeEnd}`, (fsErr) => {
+      fs.appendFile(logsFilePath, `\nGET\t\t/api/v1/on-covid-19/logs\t\t200\t\t${apiRunTimeEnd}ms`, (fsErr) => {
         if (fsErr) throw err;
       });
     }
